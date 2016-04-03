@@ -41,7 +41,7 @@ public class PreferencesActivity extends Activity {
 		button2.setOnClickListener( new View.OnClickListener() {
 		    @SuppressLint("NewApi") @Override
 		    public void onClick(View v) {
-		    	createSaved("a","�?");
+		    	createSaved("a","ɐ");
 		    	final Intent i = new Intent(PreferencesActivity.this,bActivity.class);
 		    	onDestroy();
 		        startActivity(i);
