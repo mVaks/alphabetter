@@ -25,7 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SampleActivity extends Activity implements OnClickListener {
+public class AlphaBetter extends Activity implements OnClickListener {
 	private final int RESPONSE_OK = 200;
 	
 	private final int IMAGE_PICKER_REQUEST = 1;
@@ -57,7 +57,7 @@ public class SampleActivity extends Activity implements OnClickListener {
 	    	defaultVariables();
 	    }
 	    spinner = (Spinner)findViewById(R.id.lanuageCode);
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(SampleActivity.this,
+        ArrayAdapter<String>adapter = new ArrayAdapter<String>(AlphaBetter.this,
                 android.R.layout.simple_spinner_item,paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,6 +67,8 @@ public class SampleActivity extends Activity implements OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view,
                     int position, long id) {
                 Log.v("item", (String) parent.getItemAtPosition(position));
+                langCode=(String) parent.getItemAtPosition(position);
+                checkLang();
             }
 
             @Override
@@ -84,7 +86,7 @@ public class SampleActivity extends Activity implements OnClickListener {
 			@SuppressLint("NewApi") @Override
 			public void onClick(View v) {
 				// Starting preferences activity
-				final Intent i = new Intent(SampleActivity.this,PreferencesActivity.class);
+				final Intent i = new Intent(AlphaBetter.this,PreferencesActivity.class);
 		        startActivity(i);
 		        onDestroy();
 	   	        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -114,7 +116,7 @@ public class SampleActivity extends Activity implements OnClickListener {
 		
 		// Checking are all fields set
 		if (fileName != null && !apiKey.equals("") && !langCode.equals("")) {
-			final ProgressDialog dialog = ProgressDialog.show( SampleActivity.this, "Loading ...", "Converting to text.", true, false);
+			final ProgressDialog dialog = ProgressDialog.show( AlphaBetter.this, "Loading ...", "Converting to text.", true, false);
 			final Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -128,7 +130,7 @@ public class SampleActivity extends Activity implements OnClickListener {
 							dialog.dismiss();
 							
 							// Showing response dialog
-							final AlertDialog.Builder alert = new AlertDialog.Builder(SampleActivity.this);
+							final AlertDialog.Builder alert = new AlertDialog.Builder(AlphaBetter.this);
 							String temp = apiClient.getResponseText();
 							temp = temp.toLowerCase();
 						
@@ -214,7 +216,7 @@ public class SampleActivity extends Activity implements OnClickListener {
 			});
 			thread.start();
 		} else {
-			Toast.makeText(SampleActivity.this, "All data are required.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(AlphaBetter.this, "All data are required.", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -284,6 +286,22 @@ public class SampleActivity extends Activity implements OnClickListener {
 		 
 		 
 	 }
-	 
+	 public void checkLang(){
+		 if(!langCode.equals("en")){
+			 Context context = getApplicationContext();
+         	Toast.makeText(context, langCode + " is not supported.", 
+         			   Toast.LENGTH_SHORT).show();
+         	Button button = (Button) findViewById(R.id.convert);
+         	button.setEnabled(false);
+         	button = (Button) findViewById(R.id.preferences);
+         	button.setEnabled(false);
+         }
+		 else{
+			 Button button = (Button) findViewById(R.id.convert);
+	         	button.setEnabled(true);
+	         	button = (Button) findViewById(R.id.preferences);
+	         	button.setEnabled(true);
+		 }
+	 }
 	    
 }

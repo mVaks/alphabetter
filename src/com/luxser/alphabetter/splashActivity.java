@@ -49,7 +49,7 @@ public class splashActivity extends Activity {
      // TODO Auto-generated method stub
   
 
-     Intent i = new Intent(splashActivity.this, SampleActivity.class);
+     Intent i = new Intent(splashActivity.this, AlphaBetter.class);
      overridePendingTransition(R.anim.fadei, R.anim.fadeo);
 
      startActivity(i);
@@ -67,5 +67,7 @@ public class splashActivity extends Activity {
      }, splashInterval);
      
    };
-     
+     public void onDestroy(){
+    	 imageView = null;
+     }
   }

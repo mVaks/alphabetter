@@ -45,7 +45,7 @@ public class zActivity extends Activity {
 		    @SuppressLint("NewApi") @Override
 		    public void onClick(View v) {
 		    	createSaved("z","z");
-		    	final Intent i = new Intent(zActivity.this,SampleActivity.class);
+		    	final Intent i = new Intent(zActivity.this,AlphaBetter.class);
 		    	onDestroy();
 		        startActivity(i);
 	   	        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -56,7 +56,7 @@ public class zActivity extends Activity {
 		    @SuppressLint("NewApi") @Override
 		    public void onClick(View v) {
 		    	createSaved("z","N");
-		    	final Intent i = new Intent(zActivity.this,SampleActivity.class);
+		    	final Intent i = new Intent(zActivity.this,AlphaBetter.class);
 		    	onDestroy();
 		        startActivity(i);
 	   	        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -113,5 +113,14 @@ public class zActivity extends Activity {
              mp = null;
         }
      }
-	
+	 public void onDestroy(){
+		 	button1 = null;
+			button2 = null;
+			button3 = null;
+			if(player!=null){
+				player.stop();
+				player.release();
+				player=null;
+			}
+	 }
 }

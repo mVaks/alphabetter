@@ -137,5 +137,16 @@ public class vActivity extends Activity {
              mp = null;
         }
      }
-	
+	 public void onDestroy(){
+		 	button1 = null;
+			button2 = null;
+			button3 = null;
+			button4 = null;
+			button5=null;
+			if(player!=null){
+				player.stop();
+				player.release();
+				player=null;
+			}
+	 }
 }
