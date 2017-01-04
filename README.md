@@ -1,0 +1,2 @@
+# alphabetter
+dyslexic ocr app
